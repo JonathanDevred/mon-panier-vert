@@ -1,0 +1,203 @@
+[
+    {
+      "id": 1,
+      "name": "Pomme Gala",
+      "price": 2.5,
+      "unit": "kg",
+      "origin": "France",
+      "organic": true,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 2,
+      "name": "Banane",
+      "price": 1.8,
+      "unit": "kg",
+      "origin": "Costa Rica",
+      "organic": false,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 3,
+      "name": "Carotte",
+      "price": 1.2,
+      "unit": "kg",
+      "origin": "France",
+      "organic": true,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 4,
+      "name": "Butternut",
+      "price": 3.5,
+      "unit": "pièce",
+      "origin": "France",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 5,
+      "name": "Courgette",
+      "price": 2.0,
+      "unit": "kg",
+      "origin": "Espagne",
+      "organic": true,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 6,
+      "name": "Tomate",
+      "price": 2.8,
+      "unit": "kg",
+      "origin": "Maroc",
+      "organic": true,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 7,
+      "name": "Avocat",
+      "price": 1.5,
+      "unit": "pièce",
+      "origin": "Mexique",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 8,
+      "name": "Poivron rouge",
+      "price": 3.2,
+      "unit": "kg",
+      "origin": "Espagne",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 9,
+      "name": "Oignon",
+      "price": 1.0,
+      "unit": "kg",
+      "origin": "France",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 10,
+      "name": "Ail",
+      "price": 3.5,
+      "unit": "kg",
+      "origin": "Espagne",
+      "organic": true,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 11,
+      "name": "Poire",
+      "price": 2.3,
+      "unit": "kg",
+      "origin": "Belgique",
+      "organic": true,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 12,
+      "name": "Orange",
+      "price": 3.0,
+      "unit": "kg",
+      "origin": "Espagne",
+      "organic": false,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 13,
+      "name": "Kiwi",
+      "price": 4.0,
+      "unit": "kg",
+      "origin": "Italie",
+      "organic": true,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 14,
+      "name": "Melon",
+      "price": 5.0,
+      "unit": "pièce",
+      "origin": "France",
+      "organic": false,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 15,
+      "name": "Pêche",
+      "price": 3.8,
+      "unit": "kg",
+      "origin": "Italie",
+      "organic": true,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 16,
+      "name": "Nectarine",
+      "price": 3.5,
+      "unit": "kg",
+      "origin": "France",
+      "organic": false,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 17,
+      "name": "Prune",
+      "price": 4.2,
+      "unit": "kg",
+      "origin": "Espagne",
+      "organic": true,
+      "stockStatus": true,
+      "category": "fruits"
+    },
+    {
+      "id": 18,
+      "name": "Poireau",
+      "price": 2.1,
+      "unit": "kg",
+      "origin": "France",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 19,
+      "name": "Radis",
+      "price": 1.5,
+      "unit": "kg",
+      "origin": "France",
+      "organic": true,
+      "stockStatus": true,
+      "category": "vegetables"
+    },
+    {
+      "id": 20,
+      "name": "Chou-fleur",
+      "price": 3.0,
+      "unit": "pièce",
+      "origin": "Espagne",
+      "organic": false,
+      "stockStatus": true,
+      "category": "vegetables"
+    }
+  ]
+  
