@@ -1,132 +1,120 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Header from "./_components/Header";
+import Footer from "./_components/Footer";
+import ProductCard from "./_components/ProductCard";
 
 interface Product {
   id: number;
   name: string;
   price: number;
   unit: string;
+  flag: string;
   origin: string;
   organic: boolean;
   stockStatus: boolean;
+  image: string;
   category: "fruits" | "vegetables";
 }
 
 const Home = () => {
   const [fruits, setFruits] = useState<Product[]>([]);
   const [vegetables, setVegetables] = useState<Product[]>([]);
+  const [fruitIndex, setFruitIndex] = useState(0);
+  const [vegetableIndex, setVegetableIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/data/shop-stock.json");
-      const data: Product[] = await res.json(); 
+      const data: Product[] = await res.json();
 
-      const fruitsData = data.filter((item) => item.category === "fruits");
-      const vegetablesData = data.filter((item) => item.category === "vegetables");
-
-      console.log("Fruits data:", fruitsData);
-      console.log("Vegetables data:", vegetablesData); 
-
-      setFruits(fruitsData);
-      setVegetables(vegetablesData);
+      setFruits(data.filter((item) => item.category === "fruits"));
+      setVegetables(data.filter((item) => item.category === "vegetables"));
     };
     fetchData();
   }, []);
 
+  const handleScroll = (category: "fruits" | "vegetables", direction: "left" | "right") => {
+    if (category === "fruits") {
+      setFruitIndex((prevIndex) => {
+        const maxIndex = fruits.length - 5;
+        if (direction === "left") return Math.max(prevIndex - 1, 0);
+        return Math.min(prevIndex + 1, maxIndex);
+      });
+    } else {
+      setVegetableIndex((prevIndex) => {
+        const maxIndex = vegetables.length - 5;
+        if (direction === "left") return Math.max(prevIndex - 1, 0);
+        return Math.min(prevIndex + 1, maxIndex);
+      });
+    }
+  };
+
   return (
-    <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
-      <section className="max-w-7xl mx-auto py-10 px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-green-800">Bienvenue sur Mon Panier Vert</h1>
-          <p className="text-lg text-gray-700 mt-4">
-            Découvrez nos fruits et légumes frais, soigneusement sélectionnés pour votre bien-être.
-          </p>
-        </div>
-      </section>
+    <div className="bg-white min-h-screen font-sans text-gray-900">
+      <Header />
 
-      <section className="max-w-7xl mx-auto py-10 px-4">
-        <h2 className="text-3xl font-semibold text-green-800 mb-4">Nos Fruits</h2>
-        <div className="flex overflow-x-auto space-x-4">
-          {fruits.slice(0, 5).map((fruit) => (
-            <div key={fruit.id} className="w-60 bg-white shadow-lg rounded-lg p-4">
-              <Image
-                src={`/images/fruits/${fruit.name.toLowerCase().replace(" ", "-")}.jpg`} 
-                alt={fruit.name}
-                width={240}
-                height={240}
-                className="object-cover rounded-md"
-              />
-              <h3 className="text-lg font-semibold text-green-600 mt-4">{fruit.name}</h3>
-              <p className="text-gray-600">{fruit.origin}</p>
-              <p className="text-gray-600">{fruit.price}€/{fruit.unit}</p>
-            </div>
-          ))}
+      <section className="max-w-7xl mx-auto py-16 px-8 lg:px-4">
+        {/* Fruits Section */}
+        <h2 className="text-4xl font-bold text-green-800 mb-6">Découvrez nos Fruits</h2>
+        <div className="relative flex items-center space-x-4">
+          <button
+            onClick={() => handleScroll("fruits", "left")}
+            className="absolute left-0 p-3 bg-green-600 text-white rounded-full hover:bg-green-700 z-10 transform -translate-x-6 shadow-lg transition ease-in-out duration-150"
+          >
+            &lt;
+          </button>
+          <div className="flex overflow-hidden space-x-4 ml-12 mr-12">
+            {fruits.slice(fruitIndex, fruitIndex + 5).map((fruit) => (
+              <ProductCard key={fruit.id} product={fruit} />
+            ))}
+          </div>
+          <button
+            onClick={() => handleScroll("fruits", "right")}
+            className="absolute right-0 p-3 bg-green-600 text-white rounded-full hover:bg-green-700 z-10 transform translate-x-6 shadow-lg transition ease-in-out duration-150"
+          >
+            &gt;
+          </button>
         </div>
-        <div className="mt-4 text-right">
-          <Link href="/fruits" className="text-green-600 font-semibold">Voir tous les fruits</Link>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto py-10 px-4">
-        <h2 className="text-3xl font-semibold text-green-800 mb-4">Nos Légumes</h2>
-        <div className="flex overflow-x-auto space-x-4">
-          {vegetables.slice(0, 5).map((vegetable) => (
-            <div key={vegetable.id} className="w-60 bg-white shadow-lg rounded-lg p-4">
-              <Image
-                src={`/images/vegetables/${vegetable.name.toLowerCase().replace(" ", "-")}.jpg`} 
-                alt={vegetable.name}
-                width={240}
-                height={240}
-                className="object-cover rounded-md"
-              />
-              <h3 className="text-lg font-semibold text-green-600 mt-4">{vegetable.name}</h3>
-              <p className="text-gray-600">{vegetable.origin}</p>
-              <p className="text-gray-600">{vegetable.price}€/{vegetable.unit}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 text-right">
-          <Link href="/vegetables" className="text-green-600 font-semibold">Voir tous les légumes</Link>
-        </div>
-      </section>
-
-      <section className="bg-green-600 text-white py-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <h3 className="text-3xl font-semibold">Pourquoi choisir Mon Panier Vert ?</h3>
-          <p className="text-lg mt-4">
-            Nous sélectionnons nos produits avec soin, en privilégiant des méthodes de culture durables et respectueuses de l&apos;environnement. Chaque produit est choisi pour sa fraîcheur, sa qualité et sa saveur.
-          </p>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto py-10 px-4">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-green-600">Contactez-Nous</h2>
-          <p className="text-lg text-gray-700 mt-4">
-            Vous avez des questions ? N&apos;hésitez pas à nous contacter, nous serons ravis de vous aider !
-          </p>
-          <Link href="/contact" className="mt-6 inline-block px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700">
-              Nous contacter
+        <div className="mt-6 text-right">
+          <Link href="/fruits" className="text-green-600 font-semibold text-lg hover:underline">
+            Voir tous les fruits &rarr;
           </Link>
         </div>
       </section>
 
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-sm">&copy; {new Date().getFullYear()} Mon Panier Vert. Tous droits réservés.</p>
-          <div className="mt-4">
-            <Link href="/privacy-policy" className="text-sm text-gray-400 hover:text-white mx-2">
-              Politique de confidentialité
-            </Link>
-            <Link href="/terms-of-service" className="text-sm text-gray-400 hover:text-white mx-2">
-              Conditions d&apos;utilisation
-            </Link>
+      <section className="max-w-7xl mx-auto py-16 px-8 lg:px-4">
+        {/* Vegetables Section */}
+        <h2 className="text-4xl font-bold text-green-800 mb-6">Découvrez nos Légumes</h2>
+        <div className="relative flex items-center space-x-4">
+          <button
+            onClick={() => handleScroll("vegetables", "left")}
+            className="absolute left-0 p-3 bg-green-600 text-white rounded-full hover:bg-green-700 z-10 transform -translate-x-6 shadow-lg transition ease-in-out duration-150"
+          >
+            &lt;
+          </button>
+          <div className="flex overflow-hidden space-x-4 ml-12 mr-12">
+            {vegetables.slice(vegetableIndex, vegetableIndex + 5).map((vegetable) => (
+              <ProductCard key={vegetable.id} product={vegetable} />
+            ))}
           </div>
+          <button
+            onClick={() => handleScroll("vegetables", "right")}
+            className="absolute right-0 p-3 bg-green-600 text-white rounded-full hover:bg-green-700 z-10 transform translate-x-6 shadow-lg transition ease-in-out duration-150"
+          >
+            &gt;
+          </button>
         </div>
-      </footer>
+        <div className="mt-6 text-right">
+          <Link href="/vegetables" className="text-green-600 font-semibold text-lg hover:underline">
+            Voir tous les légumes &rarr;
+          </Link>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
