@@ -1,4 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useEffect } from "react";
+import { initializeLocalStorage } from "./utils/localStorageUtils";
+import { CartProvider } from "./utils/CartContext.tsx";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -13,22 +17,23 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Mon panier vert",
-  description: "Boutique de fruits et légumes en ligne",
-};
-
-export default function RootLayout({
+export default function RootLayoutClient({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    initializeLocalStorage();
+  }, []);
+
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
